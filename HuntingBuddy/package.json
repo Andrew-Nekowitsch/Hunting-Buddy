@@ -34,5 +34,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "description": "An Ionic project"
+  "description": "An all around hunting companion. It helps with everything from weather to public land borders."
 }
