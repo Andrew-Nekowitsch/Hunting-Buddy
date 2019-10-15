@@ -2,3 +2,11 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+.temps > ion-col {
+  text-align: center;
+}
+
+ion-col > ion-icon {
+  font-size: 2rem;
+}
