@@ -23,6 +23,7 @@ const Tab1: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Weather</IonTitle>
+          <IonHeader>Minneapolis</IonHeader>
         </IonToolbar>
       </IonHeader>
       <IonContent>
