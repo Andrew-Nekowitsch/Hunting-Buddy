@@ -30,23 +30,22 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 class App extends Component {
-  CITY = 'Minneapolis'
-  COUNTRY ='US'
-  API_KEY = '417ccbf567588559229a4124b6a8b3ed';
-  API_URL = `http://api.openweathermap.org/data/2.5/forecast?q=${this.CITY},${this.COUNTRY}&appid=${this.API_KEY}`;
-  // api.openweathermap.org/data/2.5/weather?q=Minneapolis,US&appid=417ccbf567588559229a4124b6a8b3ed
-
-	state = {
-		items: [],
-	};
+	CITY = 'Minneapolis';
+	COUNTRY = 'US';
+	API_KEY = '417ccbf567588559229a4124b6a8b3ed';
+	API_URL = `http://api.openweathermap.org/data/2.5/forecast?q=${this.CITY},${this.COUNTRY}&appid=${this.API_KEY}`;
+	// api.openweathermap.org/data/2.5/weather?q=Minneapolis,US&appid=417ccbf567588559229a4124b6a8b3ed
 
 	componentDidMount() {
 		axios
 			.get(this.API_URL)
 			.then(response => response.data)
 			.then(data => {
-				this.setState({ items: data.list[1].main });
-				console.log(this.state.items);
+				localStorage.setItem('time1', JSON.stringify(data.list[0]));
+				localStorage.setItem('time2', JSON.stringify(data.list[1]));
+				localStorage.setItem('time3', JSON.stringify(data.list[2]));
+				localStorage.setItem('time4', JSON.stringify(data.list[3]));
+				localStorage.setItem('time5', JSON.stringify(data.list[4]));
 			});
 	}
 	render() {
