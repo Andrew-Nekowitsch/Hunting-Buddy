@@ -19,6 +19,7 @@ import React from 'react';
 import './Tab1.css';
 
 class Weather extends React.Component {
+	//called as you start loading the page
 	ionViewWillEnter() {
 		console.log('ionViewWillEnter event fired');
 		let data = [];
@@ -28,17 +29,29 @@ class Weather extends React.Component {
 		data[3] = JSON.parse(String(localStorage.getItem('time4')));
 		data[4] = JSON.parse(String(localStorage.getItem('time5')));
 		console.log('Did data load? : ', data);
-		var elem1 = document.getElementById('temp1');
-		if (elem1 != null) {
-			var f = ((data[0].main.temp - 273.15) * 9) / 5 + 32;
-			var c = data[0].main.temp - 273.15;
-			var time = '5pm';
-			elem1.innerHTML = `
-			<b>${time}</b>
-			<br />
-			${f.toFixed(1)}&deg;F
-			<br />
-			${c.toFixed(1)}&deg;C`;
+		var elems = [];
+		elems[0] = document.getElementById('temp1');
+		elems[1] = document.getElementById('temp2');
+		elems[2] = document.getElementById('temp3');
+		elems[3] = document.getElementById('temp4');
+		elems[4] = document.getElementById('temp5');
+
+		// populate the weather card
+		for (var i = 0; i < 5; i++) {
+			var el = elems[i];
+			if (el != null) {
+				var time = data[i].dt_txt;
+				var k = data[i].main.temp;
+				var f = (k - 273.15) * 9 / 5 + 32;
+				var c = k - 273.15;
+				el.innerHTML = `
+				<b>${time}</b>
+				<br />
+				${f.toFixed(1)}&deg;F
+				<br />
+				${c.toFixed(1)}&deg;C
+				`;
+			}
 		}
 	}
 
@@ -82,37 +95,21 @@ class Weather extends React.Component {
 										<IonIcon id="temp1icon" icon={rainy} />
 										<div id="temp1"></div>
 									</IonCol>
-									<IonCol id="temp2">
+									<IonCol>
 										<IonIcon id="temp2icon" icon={rainy} />
-										<div>
-											<b>6pm</b>
-											<br></br>
-											52&deg;F/11&deg;C
-										</div>
+										<div id="temp2"></div>
 									</IonCol>
-									<IonCol id="temp3">
+									<IonCol>
 										<IonIcon id="temp3icon" icon={cloudy} />
-										<div>
-											<b>7pm</b>
-											<br></br>
-											45&deg;F/7&deg;C
-										</div>
+										<div id="temp3"></div>
 									</IonCol>
-									<IonCol id="temp4">
+									<IonCol>
 										<IonIcon id="temp4icon" icon={cloudyNight} />
-										<div>
-											<b>8pm</b>
-											<br></br>
-											42&deg;F/5&deg;C
-										</div>
+										<div id="temp4"></div>
 									</IonCol>
-									<IonCol id="temp5">
+									<IonCol>
 										<IonIcon id="temp5icon" icon={cloudyNight} />
-										<div>
-											<b>9pm</b>
-											<br></br>
-											39&deg;F/4&deg;C
-										</div>
+										<div id="temp5"></div>
 									</IonCol>
 								</IonRow>
 							</IonGrid>
