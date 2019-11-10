@@ -86,7 +86,7 @@ class Weather extends React.Component {
 				<IonContent>
 					<IonCard className="welcome-card">
 						<IonCardHeader>
-							<IonCardTitle>Hourly Temperature<br></br></IonCardTitle>
+							<IonCardTitle>Hourly Temperature</IonCardTitle>
 						</IonCardHeader>
 						<IonCardContent>
 							<IonGrid>
