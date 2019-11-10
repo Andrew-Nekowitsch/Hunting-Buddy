@@ -40,7 +40,7 @@ class Weather extends React.Component {
 		for (var i = 0; i < 5; i++) {
 			var el = elems[i];
 			if (el != null) {
-				var time = data[i].dt_txt;
+				var time = data[i].dt_txt.substring(data[i].dt_txt.indexOf(' ')+1);;
 				var k = data[i].main.temp;
 				var f = (k - 273.15) * 9 / 5 + 32;
 				var c = k - 273.15;
@@ -86,7 +86,7 @@ class Weather extends React.Component {
 				<IonContent>
 					<IonCard className="welcome-card">
 						<IonCardHeader>
-							<IonCardTitle>Hourly Tempurature</IonCardTitle>
+							<IonCardTitle>Hourly Temperature<br></br></IonCardTitle>
 						</IonCardHeader>
 						<IonCardContent>
 							<IonGrid>
