@@ -10,3 +10,7 @@
 ion-col > ion-icon {
   font-size: 2rem;
 }
+
+.right {
+  text-align: right;
+}
