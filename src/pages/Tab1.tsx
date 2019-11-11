@@ -40,7 +40,7 @@ function fixTime(time: number) {
 	return `${time}${timeParam}`;
 }
 class Weather extends React.Component {
-	buttonIcon1: string = "asdf";
+	buttonIcon1: string = grabIcon(JSON.parse(String(localStorage.getItem("time1"))).weather.main);
 	buttonIcon2: string = "asdf";
 	buttonIcon3: string = "asdf";
 	buttonIcon4: string = "asdf";
@@ -84,6 +84,10 @@ class Weather extends React.Component {
 				k = parseFloat(data[i].main.temp);
 				f = ((k - 273.15) * 9) / 5 + 32;
 				c = k - 273.15;
+				time -= 6;
+				if (time < 0){
+					time += 24;
+				}
 				el.innerHTML = `
 				<b>${fixTime(time)}</b>
 				<br />
