@@ -1,26 +1,25 @@
-import React from 'react';
-//import { Map } from '@esri/react-arcgis';
-//import * as ReactDOM from 'react-dom';
-//import MapView from '@esri/react-arcgis';
-import MapView from 'esri/views/MapView';
-import Map from 'esri/Map';
 import { IonHeader, IonToolbar, IonPage, IonTitle, IonContent } from '@ionic/react';
+import React from 'react';
+import { loadModules } from 'esri-loader';
+import './topoPage.css';
 
-const map = new Map({
-    basemap: "topo-vector"
-});
-
-const view = new MapView({
-  map: map,
-  container: "viewDiv",
-  center: [-118.244, 34.052],
-  zoom: 12
-});
- 
-/*ReactDOM.render(
-  <Map loaderOptions={{ css: true }}/>,
-  document.getElementById('viewDiv')
-);*/
+loadModules(['esri/views/MapView', 'esri/WebMap'])
+  .then(([MapView, ArcGisMap]) => {
+    var webmap = new ArcGisMap({
+      basemap: 'topo-vector'
+    });
+    // eslint-disable-next-line
+    var view = new MapView({
+      map: webmap,
+      container: 'viewDiv',
+      center: [-91, 46],
+      zoom: 7
+    });
+  })
+  .catch(err => {
+    // handle any errors
+    console.error(err);
+  });
 
 const topoPage: React.FC = () => {
     return(
@@ -30,8 +29,9 @@ const topoPage: React.FC = () => {
             <IonTitle>Topography</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonContent />
-            <div id="viewDiv"></div>
+        <IonContent>
+            <div className="topo-map" id="viewDiv"></div>
+        </IonContent>
       </IonPage>
     );
 };
