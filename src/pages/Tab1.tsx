@@ -12,57 +12,49 @@ import {
 	IonRow,
 	IonCol,
 	IonIcon,
-	withIonLifeCycle
-} from "@ionic/react";
-import { rainy, cloudy, cloudyNight, sunny } from "ionicons/icons";
-import React from "react";
-import "./Tab1.css";
-function grabIcon(weatherStatus: string) {
-	switch (weatherStatus) {
-		case "Clouds":
-			return "cloudy";
-		case "Clear":
-			return "sunny";
-	}
-	return "string";
-}
+	withIonLifeCycle,
+} from '@ionic/react';
+
+import { Icon, Icons } from '.././components/Icon.jsx';
+// eslint-disable-next-line
+import { rainy, cloudy, cloudyNight, sunny } from 'ionicons/icons';
+import React from 'react';
+import './Tab1.css';
 
 function fixTime(time: number) {
-	var timeParam = "am";
+	var timeParam = 'am';
+	time -= 6;
+	if (time < 0) {
+		time += 24;
+	}
 	if (time === 0) {
 		time = 12;
 	} else if (time > 12) {
 		time -= 12;
-		timeParam = "pm";
+		timeParam = 'pm';
 	} else if (time === 12) {
-		timeParam = "pm";
+		timeParam = 'pm';
 	}
 	return `${time}${timeParam}`;
 }
-class Weather extends React.Component {
-	buttonIcon1: string = grabIcon(JSON.parse(String(localStorage.getItem("time1"))).weather.main);
-	buttonIcon2: string = "asdf";
-	buttonIcon3: string = "asdf";
-	buttonIcon4: string = "asdf";
-	buttonIcon5: string = "asdf";
-	//, buttonIcon2, buttonIcon3, buttonIcon4, buttonIcon5;
 
+class Weather extends React.Component {
 	//called as you start loading the page
 	ionViewWillEnter() {
-		console.log("ionViewWillEnter event fired");
+		console.log('ionViewWillEnter event fired');
 		let data = [];
-		data[0] = JSON.parse(String(localStorage.getItem("time1")));
-		data[1] = JSON.parse(String(localStorage.getItem("time2")));
-		data[2] = JSON.parse(String(localStorage.getItem("time3")));
-		data[3] = JSON.parse(String(localStorage.getItem("time4")));
-		data[4] = JSON.parse(String(localStorage.getItem("time5")));
-		console.log("Did data load? : ", data);
+		data[0] = JSON.parse(String(localStorage.getItem('time1')));
+		data[1] = JSON.parse(String(localStorage.getItem('time2')));
+		data[2] = JSON.parse(String(localStorage.getItem('time3')));
+		data[3] = JSON.parse(String(localStorage.getItem('time4')));
+		data[4] = JSON.parse(String(localStorage.getItem('time5')));
+		console.log('Did data load? : ', data);
 		var elems = [];
-		elems[0] = document.getElementById("temp1");
-		elems[1] = document.getElementById("temp2");
-		elems[2] = document.getElementById("temp3");
-		elems[3] = document.getElementById("temp4");
-		elems[4] = document.getElementById("temp5");
+		elems[0] = document.getElementById('temp1');
+		elems[1] = document.getElementById('temp2');
+		elems[2] = document.getElementById('temp3');
+		elems[3] = document.getElementById('temp4');
+		elems[4] = document.getElementById('temp5');
 		var k, f, c, time, weatherStatus;
 		var weatherIcon = [];
 
@@ -71,23 +63,15 @@ class Weather extends React.Component {
 			var el = elems[i];
 			if (el != null) {
 				time = parseInt(
-					data[i].dt_txt.substring(
-						data[i].dt_txt.indexOf(" ") + 1,
-						data[i].dt_txt.indexOf(" ") + 3
-					)
+					data[i].dt_txt.substring(data[i].dt_txt.indexOf(' ') + 1, data[i].dt_txt.indexOf(' ') + 3)
 				);
 
 				weatherStatus = data[i].weather[0].main;
-				weatherIcon[i] = grabIcon(weatherStatus);
-				console.log(weatherStatus);
+				weatherIcon[i] = weatherStatus;
 
 				k = parseFloat(data[i].main.temp);
 				f = ((k - 273.15) * 9) / 5 + 32;
 				c = k - 273.15;
-				time -= 6;
-				if (time < 0){
-					time += 24;
-				}
 				el.innerHTML = `
 				<b>${fixTime(time)}</b>
 				<br />
@@ -98,22 +82,33 @@ class Weather extends React.Component {
 			}
 		}
 		if (weatherIcon) {
-			//this.buttonIcon1 = weatherIcon[0];
-			console.log(this.buttonIcon1 + " is shitty");
-			console.log(weatherIcon);
+			console.log(weatherIcon + ' before if(weathericon)');
+			this.injectIcon(weatherIcon);
+		}
+	}
+
+	injectIcon(weatherIcon: string[]) {
+		// eslint-disable-next-line
+		let icons: HTMLCollectionOf<Element> = document.getElementsByClassName('iconz');
+
+		for (var i in weatherIcon) {
+			switch (weatherIcon[i]) {
+				case 'Clouds':
+					icons[i].innerHTML = Icons.CLOUD;
+			}
 		}
 	}
 
 	ionViewWillLeave() {
-		console.log("ionViewWillLeave event fired");
+		console.log('ionViewWillLeave event fired');
 	}
 
 	ionViewDidEnter() {
-		console.log("ionViewDidEnter event fired");
+		console.log('ionViewDidEnter event fired');
 	}
 
 	ionViewDidLeave() {
-		console.log("ionViewDidLeave event fired");
+		console.log('ionViewDidLeave event fired');
 	}
 
 	render() {
@@ -127,9 +122,7 @@ class Weather extends React.Component {
 									<IonTitle>Weather</IonTitle>
 								</IonCol>
 								<IonCol>
-									<IonTitle className="right">
-										Minneapolis
-									</IonTitle>
+									<IonTitle className="right">Minneapolis</IonTitle>
 								</IonCol>
 							</IonRow>
 						</IonGrid>
@@ -144,38 +137,23 @@ class Weather extends React.Component {
 							<IonGrid>
 								<IonRow class="temps">
 									<IonCol>
-										<IonIcon
-											icon={this.buttonIcon1}
-											id="temp1icon"
-										/>
+										<div className="iconz"></div>
 										<div id="temp1"></div>
 									</IonCol>
 									<IonCol>
-										<IonIcon
-											id="temp2icon"
-											icon={this.buttonIcon2}
-										/>
+										<div className="iconz"></div>
 										<div id="temp2"></div>
 									</IonCol>
 									<IonCol>
-										<IonIcon
-											id="temp3icon"
-											icon={this.buttonIcon3}
-										/>
+										<div className="iconz"></div>
 										<div id="temp3"></div>
 									</IonCol>
 									<IonCol>
-										<IonIcon
-											id="temp4icon"
-											icon={this.buttonIcon4}
-										/>
+										<div className="iconz"></div>
 										<div id="temp4"></div>
 									</IonCol>
 									<IonCol>
-										<IonIcon
-											id="temp5icon"
-											icon={this.buttonIcon5}
-										/>
+										<div className="iconz"></div>
 										<div id="temp5"></div>
 									</IonCol>
 								</IonRow>
@@ -189,6 +167,3 @@ class Weather extends React.Component {
 }
 
 export default withIonLifeCycle(Weather);
-export class icons {
-	buttonIcon1: string = "cloudy";
-}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { rainy, map, qrScanner } from 'ionicons/icons';
+import { rainy, map, person } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -46,6 +46,8 @@ class App extends Component {
 				localStorage.setItem('time3', JSON.stringify(data.list[2]));
 				localStorage.setItem('time4', JSON.stringify(data.list[3]));
 				localStorage.setItem('time5', JSON.stringify(data.list[4]));
+				localStorage.setItem('city', this.CITY);
+				localStorage.setItem('country', this.COUNTRY);
 			});
 	}
 	render() {
@@ -70,8 +72,8 @@ class App extends Component {
 								<IonLabel>Maps</IonLabel>
 							</IonTabButton>
 							<IonTabButton tab="tab3" href="/tab3">
-								<IonIcon icon={qrScanner} />
-								<IonLabel>Augmented Reality</IonLabel>
+								<IonIcon icon={person} />
+								<IonLabel>User Data</IonLabel>
 							</IonTabButton>
 						</IonTabBar>
 					</IonTabs>
