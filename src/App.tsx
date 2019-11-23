@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { rainy, map, person, walk } from 'ionicons/icons';
+import { rainy, map, person } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
-import topoPage from './pages/topoPage';
-import Details from './pages/Details';
 import axios from 'axios';
 
 /* Core CSS required for Ionic components to work properly */
@@ -59,9 +57,7 @@ class App extends Component {
 						<IonRouterOutlet>
 							<Route path="/tab1" component={Tab1} exact={true} />
 							<Route path="/tab2" component={Tab2} exact={true} />
-							<Route path="/tab2/details" component={Details} />
 							<Route path="/tab3" component={Tab3} />
-							<Route path="/topoPage" component={topoPage}/>
 							<Route exact path="/" render={() => <Redirect to="/tab1" />} />
 						</IonRouterOutlet>
 						<IonTabBar slot="bottom">
@@ -76,10 +72,6 @@ class App extends Component {
 							<IonTabButton tab="tab3" href="/tab3">
 								<IonIcon icon={person} />
 								<IonLabel>User Data</IonLabel>
-							</IonTabButton>
-							<IonTabButton tab="topoPage" href="/topoPage">
-								<IonIcon icon={walk} />
-								<IonLabel>Topography</IonLabel>
 							</IonTabButton>
 						</IonTabBar>
 					</IonTabs>
