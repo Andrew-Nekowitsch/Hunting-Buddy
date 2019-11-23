@@ -1,5 +1,7 @@
 {
   "name": "HuntingBuddy",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

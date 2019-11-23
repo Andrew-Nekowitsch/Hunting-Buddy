@@ -6,7 +6,7 @@ const Tab3Page: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Augmented Reality</IonTitle>
+          <IonTitle>User Data</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent />
