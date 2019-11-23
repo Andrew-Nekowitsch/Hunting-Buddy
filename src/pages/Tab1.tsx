@@ -52,7 +52,7 @@ function fixTime(time: number) {
 class Weather extends React.Component {
 	//called as you start loading the page
 	ionViewWillEnter() {
-		console.log("ionViewWillEnter event fired");
+		//console.log("ionViewWillEnter event fired");
 		let data = [];
 		var elems = [];
 		var k, f, c, time, weatherStatus;
@@ -86,7 +86,7 @@ class Weather extends React.Component {
 				${c.toFixed(1)}&deg;C
 				`;
 			}
-		}		
+		}
 		console.log(data);
 		if (weatherIcon) {
 			this.injectIcon(weatherIcon);
@@ -94,9 +94,7 @@ class Weather extends React.Component {
 	}
 
 	injectIcon(weatherIcon: string[]) {
-		let icons: HTMLCollectionOf<Element> = document.getElementsByClassName(
-			"iconz"
-		);
+		let icons: HTMLCollectionOf<Element> = document.getElementsByClassName("iconz");
 		for (var i in weatherIcon) {
 			switch (weatherIcon[i]) {
 				case "Clouds":
@@ -120,7 +118,7 @@ class Weather extends React.Component {
 			}
 		}
 	}
-
+	/*
 	ionViewWillLeave() {
 		console.log("ionViewWillLeave event fired");
 	}
@@ -132,7 +130,7 @@ class Weather extends React.Component {
 	ionViewDidLeave() {
 		console.log("ionViewDidLeave event fired");
 	}
-
+*/
 	render() {
 		return (
 			<IonPage>
@@ -145,7 +143,7 @@ class Weather extends React.Component {
 								</IonCol>
 								<IonCol>
 									<IonTitle className="right">
-										Minneapolis
+										{localStorage.getItem("city")}
 									</IonTitle>
 								</IonCol>
 							</IonRow>
