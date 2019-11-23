@@ -97,10 +97,9 @@ class Weather extends React.Component {
 		}
 	}
 
+	 
 	injectIcon(weatherIcon: string[]) {
-		// eslint-disable-next-line
 		let icons: HTMLCollectionOf<Element> = document.getElementsByClassName('iconz');
-
 		for (var i in weatherIcon) {
 			switch (weatherIcon[i]) {
 				case 'Clouds':
@@ -112,7 +111,6 @@ class Weather extends React.Component {
 				case 'Snow':
 					icons[i].innerHTML = Icons.SNOW;
 					break;
-				//eslint-disable-next-line
 				case 'Drizzle':
 				case 'Rain':
 					icons[i].innerHTML = Icons.RAIN;
