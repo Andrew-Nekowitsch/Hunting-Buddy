@@ -2,7 +2,7 @@
 ---------------TAB1---------------
 Weather implemented by: Andrew N
 Time implemented by: Andrew N
-Time updated by: James
+Time updated by: James, Paul
 */
 
 import {
@@ -34,18 +34,9 @@ const Icons = {
 
 function fixTime(time: number) {
 	var timeParam = 'am';
-	time -= 6;
-	if (time < 0) {
-		time += 24;
-	}
-	if (time === 0) {
-		time = 12;
-	} else if (time > 12) {
-		time -= 12;
-		timeParam = 'pm';
-	} else if (time === 12) {
-		timeParam = 'pm';
-	}
+	if (time - 12  > 0)
+		timeParam = 'pm'
+	
 	return `${time}${timeParam}`;
 }
 
